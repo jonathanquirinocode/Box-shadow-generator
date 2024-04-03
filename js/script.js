@@ -26,6 +26,14 @@ class BoxShadowGenerator {
         this.webkitRule = webkitRule;
         this.mozRule = mozRule;
     };
+
+    initialize(){
+        this.horizontalValue.value = this.horizontal.value;
+        this.verticalValue.value = this.vertical.value;
+        this.blurValue.value = this.blur.value;
+        this.spreadValue.value = this.spread.value;
+    };
+
 };
 
 const horizontal = document.querySelector("#horizontal");
@@ -42,3 +50,22 @@ const previewBox = document.querySelector("#box");
 const rule = document.querySelector("#rule");
 const webkitRule = document.querySelector("#webkit-rule");
 const mozRule = document.querySelector("#moz-rule");
+
+const boxShadow = new BoxShadowGenerator(
+    horizontal,
+    horizontalValue,
+    vertical,
+    verticalValue,
+    blur,
+    blurValue,
+    spread,
+    spreadValue,
+    previewBox,
+    rule,
+    webkitRule,
+    mozRule
+);
+
+console.log(boxShadow);
+
+boxShadow.initialize();
