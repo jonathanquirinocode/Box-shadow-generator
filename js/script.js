@@ -32,6 +32,12 @@ class BoxShadowGenerator {
         this.verticalValue.value = this.vertical.value;
         this.blurValue.value = this.blur.value;
         this.spreadValue.value = this.spread.value;
+        
+        this.applyRule();
+    };
+
+    applyRule(){
+        this.previewBox.style.boxShadow = `${this.horizontalValue.value}px ${this.verticalValue.value}px ${this.blurValue.value}px ${this.spreadValue.value}px #00000`;
     };
 
 };
