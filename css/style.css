@@ -23,7 +23,7 @@ p,label{
 
 #box-shadow-generator{
     display: flex;
-    max-width: 1000px;
+    max-width: 1250px;
     margin: 0 auto;
 }
 
@@ -141,6 +141,7 @@ p,label{
 
 #generated-rule{
     text-align: center;
+    margin-top: 4rem;
 }
 
 #generated-rule p{
