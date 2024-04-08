@@ -8,6 +8,11 @@ class BoxShadowGenerator {
         blurValue,
         spread,
         spreadValue,
+        color,
+        colorValue,
+        opacity,
+        opacityValue,
+        inset,
         previewBox,
         rule,
         webkitRule,
@@ -21,6 +26,11 @@ class BoxShadowGenerator {
         this.blurValue = blurValue;
         this.spread = spread;
         this.spreadValue = spreadValue;
+        this.color = color;
+        this.colorValue = colorValue;
+        this.opacity = opacity;
+        this.opacityValue = opacityValue;
+        this.inset = inset;
         this.previewBox = previewBox;
         this.rule = rule;
         this.webkitRule = webkitRule;
@@ -32,14 +42,21 @@ class BoxShadowGenerator {
         this.verticalValue.value = this.vertical.value;
         this.blurValue.value = this.blur.value;
         this.spreadValue.value = this.spread.value;
+        this.colorValue.value = this.color.value;
+        this.opacityValue.value = this.opacity.value;
         
         this.applyRule();
         this.showRule();
     };
 
     applyRule(){
-        this.previewBox.style.boxShadow = `${this.horizontalValue.value}px ${this.verticalValue.value}px ${this.blurValue.value}px ${this.spreadValue.value}px #000`;
-        this.currentRule = this.previewBox.style.boxShadow;
+
+        const rgbValue = this.hexToRgb(this.colorValue.value);
+
+        const shadowRule = `${this.horizontalValue.value}px ${this.verticalValue.value}px ${this.blurValue.value}px ${this.spreadValue.value}px rgba(${rgbValue})`;
+        
+        this.previewBox.style.boxShadow = shadowRule;
+        this.currentRule = shadowRule;
     };
 
     showRule(){
@@ -67,11 +84,24 @@ class BoxShadowGenerator {
             case "spread":
                 this.spreadValue.value = value;
             break;
+
+            case "color":
+                this.colorValue.value = value;
+            break;
+
+            case "opacity":
+                this.opacityValue.value = value;
+            break;
         };
 
         this.applyRule();
         this.showRule();
 
+    };
+
+    hexToRgb(hex){
+        return `${("0x" + hex[1] + hex[2]) | 0}, ${("0x" + hex[3] + hex[4]) | 0}, 
+        ${("0x" + hex[5] + hex[6]) | 0}`;
     };
 
 };
@@ -84,6 +114,14 @@ const blur = document.querySelector("#blur");
 const blurValue = document.querySelector("#blur-value");
 const spread = document.querySelector("#spread");
 const spreadValue = document.querySelector("#spread-value");
+
+const color = document.querySelector("#color");
+const colorValue = document.querySelector("#color-value");
+
+const opacity = document.querySelector("#opacity");
+const opacityValue = document.querySelector("#opacity-value");
+
+const inset = document.querySelector("#inset");
 
 const previewBox = document.querySelector("#box");
 
@@ -100,6 +138,11 @@ const boxShadow = new BoxShadowGenerator(
     blurValue,
     spread,
     spreadValue,
+    color,
+    colorValue,
+    opacity,
+    opacityValue,
+    inset,
     previewBox,
     rule,
     webkitRule,
@@ -134,4 +177,16 @@ spread.addEventListener("input", (e) => {
     const value = e.target.value;
 
     boxShadow.updatePreview("spread", value)
+});
+
+color.addEventListener("input", (e) => {
+    const value = e.target.value;
+
+    boxShadow.updatePreview("color", value)
+});
+
+opacity.addEventListener("input", (e) => {
+    const value = e.target.value;
+
+    boxShadow.updatePreview("opacity", value)
 });
