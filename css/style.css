@@ -23,7 +23,7 @@ p,label{
 
 #box-shadow-generator{
     display: flex;
-    max-width: 1250px;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
@@ -147,7 +147,6 @@ p,label{
 #generated-rule p{
     margin-top: 0.5rem;
 }
-
  
 #rules-area{
     background-color: #1e1e2c;

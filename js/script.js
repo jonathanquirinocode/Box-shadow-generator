@@ -31,6 +31,7 @@ class BoxShadowGenerator {
         this.opacity = opacity;
         this.opacityValue = opacityValue;
         this.inset = inset;
+        this.insetValue = inset.checked;
         this.previewBox = previewBox;
         this.rule = rule;
         this.webkitRule = webkitRule;
@@ -52,8 +53,12 @@ class BoxShadowGenerator {
     applyRule(){
 
         const rgbValue = this.hexToRgb(this.colorValue.value);
-
-        const shadowRule = `${this.horizontalValue.value}px ${this.verticalValue.value}px ${this.blurValue.value}px ${this.spreadValue.value}px rgba(${rgbValue})`;
+       
+        const shadowRule = `${this.insetValue ? "inset" : ""} ${
+            this.horizontalValue.value
+        }px ${this.verticalValue.value}px ${this.blurValue.value}px ${
+            this.spreadValue.value
+        }px rgba(${rgbValue}, ${this.opacityValue.value})`;
         
         this.previewBox.style.boxShadow = shadowRule;
         this.currentRule = shadowRule;
@@ -91,6 +96,10 @@ class BoxShadowGenerator {
 
             case "opacity":
                 this.opacityValue.value = value;
+            break;
+
+            case "inset":
+                this.insetValue = value;
             break;
         };
 
@@ -189,4 +198,10 @@ opacity.addEventListener("input", (e) => {
     const value = e.target.value;
 
     boxShadow.updatePreview("opacity", value)
+});
+
+inset.addEventListener("input", (e) => {
+    const value = e.target.checked;
+
+    boxShadow.updatePreview("inset", value)
 });
